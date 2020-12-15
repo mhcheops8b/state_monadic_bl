@@ -20,28 +20,28 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lattice.h">
+    <ClInclude Include="include\bl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="poset.h">
+    <ClInclude Include="include\bounded_lattice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bounded_lattice.h">
+    <ClInclude Include="include\lattice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bl.h">
+    <ClInclude Include="include\monadic_bl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="monadic_bl.h">
+    <ClInclude Include="include\poset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="print_utils.h">
+    <ClInclude Include="include\print_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="state_monadic_bl.h">
+    <ClInclude Include="include\state_bl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="state_bl.h">
+    <ClInclude Include="include\state_monadic_bl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
