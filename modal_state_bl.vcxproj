@@ -22,6 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{8AE36AAA-E44D-4BB0-8176-FAD87BB3616B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,11 +98,28 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <LanguageStandard>Default</LanguageStandard>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>Default</LanguageStandard>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="modal_state_bl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="modal_state_bl.h" />
+    <ClInclude Include="bl.h" />
+    <ClInclude Include="bounded_lattice.h" />
+    <ClInclude Include="lattice.h" />
+    <ClInclude Include="monadic_bl.h" />
+    <ClInclude Include="poset.h" />
+    <ClInclude Include="print_utils.h" />
+    <ClInclude Include="state_bl.h" />
+    <ClInclude Include="state_monadic_bl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
