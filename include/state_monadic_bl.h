@@ -29,13 +29,23 @@ struct State_Monadic_BL : public Monadic_BL<N>
 					Bounded_Lattice<N>{
 						Lattice<N>
 						{
-							Poset<N>{ _sbl.order },
+							Poset<N>
+							{ 
+								_sbl.order,
+								check,
+								disp_err
+							},
+							disp_err
 						}, 
 						_sbl.zero, 
 						_sbl.unit,
+						check,
+						disp_err
 					}, 
 					_sbl.dot, 
 					_sbl.impl,
+					check,
+					disp_err
 				}, 
 				_fa, 
 				_ex,
@@ -58,6 +68,7 @@ struct State_Monadic_BL : public Monadic_BL<N>
 	bool has_SM7(bool disp_err = true);
 
 	bool is_state_monadic_BL(bool disp_err = true);
+	State_BL<N> get_state_BL_reduct();
 };
 
 template<size_t N>
@@ -163,9 +174,31 @@ bool State_Monadic_BL<N>::has_SM7(bool disp_err)
 template<size_t N>
 bool State_Monadic_BL<N>::is_state_monadic_BL(bool disp_err)
 {
-	return has_SM1(disp_err) && has_SM2(disp_err) && has_SM3(disp_err) &&
-		has_SM4(disp_err) && has_SM5(disp_err) && has_SM6(disp_err) &&
-		has_SM7(disp_err);
+	return get_state_BL_reduct().is_state_BL(disp_err) && 
+		has_SM6(disp_err) && has_SM7(disp_err);
 }
 
+template<size_t N>
+State_BL<N> State_Monadic_BL<N>::get_state_BL_reduct()
+{
+	return
+		State_BL<N>{
+			BL<N>{
+				Bounded_Lattice<N>{
+					Lattice<N>{
+						Poset<N>{order, false}, 
+						false
+					}, 
+					zero, 
+					unit, 
+					false
+				},
+				dot, 
+				impl, 
+				false
+			}, 
+			sg, 
+			false
+		};
+}
 

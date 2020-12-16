@@ -8,10 +8,9 @@ template<size_t N>
 struct Lattice : public Poset<N>
 {
 	explicit
-	Lattice(const Poset<N>& _poset, bool check = true, bool disp_err = true) : Poset<N>{ _poset }
+	Lattice(const Poset<N>& _poset, bool disp_err = true) : Poset<N>{ _poset }
 	{
-		if (check)
-			is_lattice(disp_err);
+		is_lattice(disp_err);
 	}
 	
 	std::array<std::array<int, N>, N>   inf;
@@ -20,6 +19,7 @@ struct Lattice : public Poset<N>
 	bool has_inf(int x, int y, int& inf);
 	bool has_sup(int x, int y, int& sup);
 
+	// Initializes inf and sup arrays, must be called in constructor.
 	bool is_lattice(bool disp_err = true);
 };
 

@@ -148,17 +148,17 @@ template<size_t N>
 void BL<N>::disp()
 {
 	std::cout << "Order:\n";
-	Print_Utils<N>::disp_bin_op(order);
+	Print_Utils<N>::disp_binary_op(order);
 
 	std::cout << "\nInf:\n";
-	Print_Utils<N>::disp_bin_op(this->inf);
+	Print_Utils<N>::disp_binary_op(this->inf);
 
 	std::cout << "\nSup:\n";
-	Print_Utils<N>::disp_bin_op(this->sup);
+	Print_Utils<N>::disp_binary_op(this->sup);
 
 	std::cout << "\nDot:\n";
-	Print_Utils<N>::disp_bin_op(dot);
+	Print_Utils<N>::disp_binary_op(dot);
 
 	std::cout << "\nImpl:\n";
-	Print_Utils<N>::disp_bin_op(dot);
+	Print_Utils<N>::disp_binary_op(dot);
 }

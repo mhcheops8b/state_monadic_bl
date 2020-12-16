@@ -151,6 +151,7 @@ int main()
 
 		// just for checking the other constructor for State_Monadic_BL from State_BL
 		State_Monadic_BL<5> test_smbl{ sbl1, ex3_1_fa3, ex3_1_ex3 };
+		//test_smbl.get_state_BL_reduct().disp();
 #if 0
 	}
 #endif
