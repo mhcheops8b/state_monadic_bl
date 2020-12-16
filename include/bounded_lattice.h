@@ -8,10 +8,13 @@ template<size_t N>
 struct Bounded_Lattice : public Lattice<N>
 {
 	explicit
-	Bounded_Lattice(const Lattice<N>& _lat, int _zero = 0, int _unit = N - 1, bool disp_err = true) : Lattice<N>{ _lat }, zero{ _zero }, unit{ _unit }
+	Bounded_Lattice(const Lattice<N>& _lat, int _zero = 0, int _unit = N - 1, bool check = true, bool disp_err = true) 
+		: Lattice<N>{ _lat }, zero{ _zero }, unit{ _unit }
 	{
-		is_bounded_lattice(disp_err);
+		if (check)
+			is_bounded_lattice(disp_err);
 	}
+	
 	int zero;
 	int unit;
 

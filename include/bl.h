@@ -9,9 +9,10 @@ struct BL : public Bounded_Lattice<N>
 	explicit
 	BL(const Bounded_Lattice<N>& _blat,
 		const std::array<std::array<int, N>, N>& _dot,
-		const std::array<std::array<int, N>, N>& _impl, bool disp_err = true) : Bounded_Lattice<N>{ _blat }, dot{ _dot }, impl{ _impl }
+		const std::array<std::array<int, N>, N>& _impl, bool check = true, bool disp_err = true) : Bounded_Lattice<N>{ _blat }, dot{ _dot }, impl{ _impl }
 	{
-		is_BL(disp_err);
+		if (check)
+			is_BL(disp_err);
 	}
 
 	std::array<std::array<int, N>, N>   dot;

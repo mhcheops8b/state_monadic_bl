@@ -4,16 +4,19 @@ template<size_t N>
 struct State_BL : public BL<N>
 {
 	explicit
-	State_BL(const BL<N>& _bl) : BL<N>(_bl), sg{}
+	State_BL(const BL<N>& _bl) : BL<N>{ _bl }, sg{}
 	{
 		sg[zero] = zero;
 		sg[unit] = unit;
-	};
-	explicit
-	State_BL(const BL<N>& _bl, const std::array<int, N>& _sg, bool disp_err = true) : BL<N>(_bl), sg(_sg)
-	{
-		is_state_BL(disp_err);
 	}
+	
+	explicit
+	State_BL(const BL<N>& _bl, const std::array<int, N>& _sg, bool check = true, bool disp_err = true) : BL<N>{ _bl }, sg{ _sg }
+	{
+		if (check)
+			is_state_BL(disp_err);
+	}
+	
 	std::array<int, N> sg; // sigma (internal state)
 
 	// same as for state monadic

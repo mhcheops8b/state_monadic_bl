@@ -76,6 +76,7 @@ int main()
 {
 	BL<5> ex3_1_bl{ Bounded_Lattice<5>{Lattice<5>{Poset<5>{ex3_1_ord}}} , ex3_1_dot, ex3_1_imp };
 
+	
 #if 0
 	if (ex3_1_bl.init())
 	{
@@ -147,6 +148,9 @@ int main()
 					std::cout << "sigma_" << (j + 1) << ", forall_" << (i + 1) << ", exists_" << (i + 1) << '\n';
 
 			}
+
+		// just for checking the other constructor for State_Monadic_BL from State_BL
+		State_Monadic_BL<5> test_smbl{ sbl1, ex3_1_fa3, ex3_1_ex3 };
 #if 0
 	}
 #endif

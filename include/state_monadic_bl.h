@@ -15,36 +15,36 @@ struct State_Monadic_BL : public Monadic_BL<N>
 	}
 
 	explicit
-	State_Monadic_BL(const Monadic_BL<N>& _mbl, const std::array<int, N>& _sg, bool disp_err = true)
+	State_Monadic_BL(const Monadic_BL<N>& _mbl, const std::array<int, N>& _sg, bool check = true, bool disp_err = true)
 		: Monadic_BL<N>{ _mbl }, sg{ _sg }
 	{
-		is_state_monadic_BL(disp_err);
+		if (check)
+			is_state_monadic_BL(disp_err);
 	}
 
 	explicit
-	State_Monadic_BL(const State_BL<N>& _sbl, const std::array<int, N>& _fa, const std::array<int, N>& _ex, bool disp_err = true)
+	State_Monadic_BL(const State_BL<N>& _sbl, const std::array<int, N>& _fa, const std::array<int, N>& _ex, bool check = true, bool disp_err = true)
 		: Monadic_BL<N>{ 
 				BL<N>{
 					Bounded_Lattice<N>{
 						Lattice<N>
 						{
-							Poset<N>{_sbl.order, disp_err},
-							disp_err
+							Poset<N>{ _sbl.order },
 						}, 
 						_sbl.zero, 
 						_sbl.unit,
-						disp_err
 					}, 
 					_sbl.dot, 
 					_sbl.impl,
-					disp_err
 				}, 
 				_fa, 
 				_ex,
+				check,
 				disp_err
 		   }, sg{ _sbl.sg }
 	{
-		is_state_monadic_BL(disp_err);
+		if (check)
+			is_state_monadic_BL(disp_err);
 	}
 
 	std::array<int, N> sg; // sigma (internal state)

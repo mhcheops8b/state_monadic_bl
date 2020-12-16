@@ -7,10 +7,12 @@ template<size_t N>
 struct Poset
 {
 	explicit 
-	Poset(const std::array<std::array<int, N>, N>& _order, bool disp_err = true) : order{ _order }
+	Poset(const std::array<std::array<int, N>, N>& _order, bool check = true, bool disp_err = true) : order{ _order }
 	{
-		is_poset(disp_err);
+		if (check)
+			is_poset(disp_err);
 	}
+
 	std::array<std::array<int, N>, N> order;
 
 	bool is_reflexive(bool disp_err = true);

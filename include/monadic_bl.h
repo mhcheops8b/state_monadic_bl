@@ -13,11 +13,13 @@ struct Monadic_BL : public BL<N>
 		fa[zero] = ex[zero] = zero;
 		fa[unit] = ex[unit] = unit;
 	}
+
 	explicit
 	Monadic_BL(const BL<N>& _bl, const std::array<int, N>& _fa,
-		const std::array<int, N>& _ex, bool disp_err = true) : BL<N>{ _bl }, fa{ _fa }, ex{ _ex }
+		const std::array<int, N>& _ex, bool check = true, bool disp_err = true) : BL<N>{ _bl }, fa{ _fa }, ex{ _ex }
 	{
-		is_monadic_BL(disp_err);
+		if (check)
+			is_monadic_BL(disp_err);
 	}
 
 	std::array<int, N> fa; // for all
