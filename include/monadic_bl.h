@@ -10,8 +10,8 @@ struct Monadic_BL : public BL<N>
 	explicit
 	Monadic_BL(const BL<N>& bl) : BL<N>{ bl }, fa{}, ex{}
 	{
-		fa[zero] = ex[zero] = zero;
-		fa[unit] = ex[unit] = unit;
+		fa[this->zero] = ex[this->zero] = this->zero;
+		fa[this->unit] = ex[this->unit] = this->unit;
 	}
 
 	explicit
@@ -42,7 +42,7 @@ template<size_t N>
 bool Monadic_BL<N>::has_M1(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
-		if (impl[fa[i]][i] != unit)
+		if (this->impl[fa[i]][i] != this->unit)
 		{
 			if (disp_err)
 				std::cout << "M1: i = " << i << ": forall(i) -> i <> 1.\n";
@@ -57,7 +57,7 @@ bool Monadic_BL<N>::has_M2(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (fa[impl[i][fa[j]]] != impl[ex[i]][fa[j]])
+			if (fa[this->impl[i][fa[j]]] != this->impl[ex[i]][fa[j]])
 			{
 				if (disp_err)
 					std::cout << "M2: i = " << i << ", j = " << j << ": forall(i->forall(j)) <> exists(i)->forall(j).\n";
@@ -72,7 +72,7 @@ bool Monadic_BL<N>::has_M3(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (fa[impl[fa[i]][j]] != impl[fa[i]][fa[j]])
+			if (fa[this->impl[fa[i]][j]] != this->impl[fa[i]][fa[j]])
 			{
 				if (disp_err)
 					std::cout << "M3: i = " << i << ", j = " << j << ": forall(forall(i)->j) <> forall(i)->forall(j).\n";
@@ -87,7 +87,7 @@ bool Monadic_BL<N>::has_M4(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (fa[sup[ex[i]][j]] != sup[ex[i]][fa[j]])
+			if (fa[this->sup[ex[i]][j]] != this->sup[ex[i]][fa[j]])
 			{
 				if (disp_err)
 					std::cout << "M4: i = " << i << ", j = " << j << ": forall(exists(i) v j) <> exists(i) v exists(j).\n";
@@ -101,7 +101,7 @@ template<size_t N>
 bool Monadic_BL<N>::has_M5(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
-		if (ex[dot[i][i]] != dot[ex[i]][ex[i]])
+		if (ex[this->dot[i][i]] != this->dot[ex[i]][ex[i]])
 		{
 			if (disp_err)
 				std::cout << "M5: i = " << i << ": exists(i * i) <> exists(i) * exists(i).\n";
@@ -139,7 +139,7 @@ void Monadic_BL<N>::gen_all_fa(int level)
 	else
 	{
 		for (int i = 0; i < N; i++)
-			if (order[i][level])
+			if (this->order[i][level])
 			{
 				fa[level] = i;
 				gen_all_fa(level + 1);
@@ -163,7 +163,7 @@ void Monadic_BL<N>::gen_all_ex(int level)
 	else
 	{
 		for (int i = 0; i < N; i++)
-			if (order[level][i])
+			if (this->order[level][i])
 			{
 				ex[level] = i;
 				gen_all_ex(level + 1);

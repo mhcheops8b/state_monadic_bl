@@ -28,7 +28,7 @@ bool Lattice<N>::has_inf(int x, int y, int& inf)
 {
 	std::set<int> inf_set;
 	for (int i = 0; i < N; i++)
-		if (order[i][x] && order[i][y])
+		if (this->order[i][x] && this->order[i][y])
 			inf_set.insert(i);
 	int inf_candidate{};
 	
@@ -44,7 +44,7 @@ bool Lattice<N>::has_inf(int x, int y, int& inf)
 		else
 		{
 
-			if (order[inf_candidate][el])
+			if (this->order[inf_candidate][el])
 				inf_candidate = el;
 		}
 	}
@@ -56,7 +56,7 @@ bool Lattice<N>::has_inf(int x, int y, int& inf)
 	}
 	// check if all elements are comparable
 	for (const auto& el : inf_set)
-		if (!order[el][inf_candidate])
+		if (!this->order[el][inf_candidate])
 		{ 
 			//std::cout << "Not lower semilattice. No Inf for x = " << x << " and y =  " << y << ".\n";
 			return false;
@@ -72,7 +72,7 @@ bool Lattice<N>::has_sup(int x, int y, int& sup)
 	std::set<int> sup_set;
 
 	for (int i = 0; i < N; i++)
-		if (order[x][i] && order[y][i])
+		if (this->order[x][i] && this->order[y][i])
 		{
 			sup_set.insert(i);
 		}
@@ -89,7 +89,7 @@ bool Lattice<N>::has_sup(int x, int y, int& sup)
 		}
 		else
 		{
-			if (order[el][sup_candidate])
+			if (this->order[el][sup_candidate])
 				sup_candidate = el;
 		}
 	}
@@ -102,7 +102,7 @@ bool Lattice<N>::has_sup(int x, int y, int& sup)
 
 	// check if all elements are comparable
 	for (const auto& el : sup_set)
-		if (!order[sup_candidate][el])
+		if (!this->order[sup_candidate][el])
 		{
 			//std::cout << "Not upper semilattice. No Sup for x = " << x << " and y =  " << y << ".\n";
 			return false;

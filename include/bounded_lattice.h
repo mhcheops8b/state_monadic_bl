@@ -25,7 +25,7 @@ template<size_t N>
 bool Bounded_Lattice<N>::is_bounded_lattice(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
-		if (!order[zero][i])
+		if (!this->order[zero][i])
 		{
 			if (disp_err)
 				std::cout << "Element `" << zero << "` is not bottom element.\n";
@@ -33,7 +33,7 @@ bool Bounded_Lattice<N>::is_bounded_lattice(bool disp_err)
 		}
 
 	for (int i = 0; i < N - 1; i++)
-		if (!order[i][unit])
+		if (!this->order[i][unit])
 		{
 			if (disp_err)
 				std::cout << "Element `" << unit << "` is not top element.\n";

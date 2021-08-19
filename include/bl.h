@@ -68,10 +68,10 @@ template<size_t N>
 bool BL<N>::is_unit_dot_neutral(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
-		if (dot[i][unit] != i)
+		if (this->dot[i][this->unit] != i)
 		{
 			if (disp_err)
-				std::cout << "Element `" << unit << "` is not neutral for i = " << i << ".\n";
+				std::cout << "Element `" << this->unit << "` is not neutral for i = " << i << ".\n";
 			return false;
 		}
 
@@ -91,14 +91,14 @@ bool BL<N>::has_residual_property(bool disp_err)
 		for (int j = 0; j < N; j++)
 			for (int k = 0; k < N; k++)
 			{
-				if (order[dot[i][j])][k] && !order[i][impl[j][k]]
+				if (this->order[dot[i][j]][k] && !this->order[i][impl[j][k]])
 				{
 					if (disp_err)
 						std::cout << "Residual property: i = " << i << ", j = " << j << ", k = " << k << ": i * j <= k =/=> i <= j -> k.\n";
 					return false;
 				}
 
-				if (order[i][impl[j][k]] && !order[dot[i][j]][k])
+				if (this->order[i][impl[j][k]] && !this->order[dot[i][j]][k])
 				{
 					if (disp_err)
 						std::cout << "Residual property: i = " << i << ", j = " << j << ", k = " << k << ": i <= j -> k =/=> i * j <= k.\n";
@@ -114,7 +114,7 @@ bool BL<N>::has_divisibility(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (inf[i][j] != dot[i][impl[i][j]])
+			if (this->inf[i][j] != dot[i][impl[i][j]])
 			{
 				if (disp_err)
 					std::cout << "Divisibility: i = " << i << "j = " << j << ": i ^ j <> i * (i -> j).\n";
@@ -128,7 +128,7 @@ bool BL<N>::has_prelinearity(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (sup[impl[i][j]][impl[j][i]] != unit)
+			if (this->sup[impl[i][j]][impl[j][i]] != this->unit)
 			{
 				if (disp_err)
 					std::cout << "Prelinearity: i = " << i << ", j = " << j << ": (i->j) v (j->i) <> 1.\n";
@@ -148,7 +148,7 @@ template<size_t N>
 void BL<N>::disp()
 {
 	std::cout << "Order:\n";
-	Print_Utils<N>::disp_binary_op(order);
+	Print_Utils<N>::disp_binary_op(this->order);
 
 	std::cout << "\nInf:\n";
 	Print_Utils<N>::disp_binary_op(this->inf);

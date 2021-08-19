@@ -6,8 +6,8 @@ struct State_BL : public BL<N>
 	explicit
 	State_BL(const BL<N>& _bl) : BL<N>{ _bl }, sg{}
 	{
-		sg[zero] = zero;
-		sg[unit] = unit;
+		sg[this->zero] = this->zero;
+		sg[this->unit] = this->unit;
 	}
 	
 	explicit
@@ -40,10 +40,10 @@ struct State_BL : public BL<N>
 template<size_t N>
 bool State_BL<N>::has_SM1(bool disp_err)
 {
-	if (sg[zero] != zero)
+	if (sg[this->zero] != this->zero)
 	{
 		if (disp_err)
-			std::cout << "SM1: sg(zero) <> zero for zero = " << zero << ".\n";
+			std::cout << "SM1: sg(zero) <> zero for zero = " << this->zero << ".\n";
 		return false;
 	}
 	return true;
@@ -54,7 +54,7 @@ bool State_BL<N>::has_SM2(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (sg[impl[i][j]] != impl[sg[i]][sg[inf[i][j]]])
+			if (sg[this->impl[i][j]] != this->impl[sg[i]][sg[this->inf[i][j]]])
 			{
 				if (disp_err)
 					std::cout << "SM2: i = " << i << ", j = " << j << ": sigma(i -> j) <> sigma(i) -> sigma(i ^ j).\n";
@@ -69,7 +69,7 @@ bool State_BL<N>::has_SM3(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (sg[dot[i][j]] != dot[sg[i]][sg[impl[i][dot[i][j]]]])
+			if (sg[this->dot[i][j]] != this->dot[sg[i]][sg[this->impl[i][this->dot[i][j]]]])
 			{
 				if (disp_err)
 					std::cout << "SM3: i = " << i << ", j = " << j << ": sigma(i * j) <> sigma( i -> (i * j) ).\n";
@@ -84,7 +84,7 @@ bool State_BL<N>::has_SM4(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (sg[dot[sg[i]][sg[j]]] != dot[sg[i]][sg[j]])
+			if (sg[this->dot[sg[i]][sg[j]]] != this->dot[sg[i]][sg[j]])
 			{
 				if (disp_err)
 					std::cout << "SM4: i = " << i << ", j = " << j << ": sigma(sigma(i) * sigma(j) <> sigma(i) * sigma(j).\n";
@@ -99,7 +99,7 @@ bool State_BL<N>::has_SM5(bool disp_err)
 {
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			if (sg[impl[sg[i]][sg[j]]] != impl[sg[i]][sg[j]])
+			if (sg[this->impl[sg[i]][sg[j]]] != this->impl[sg[i]][sg[j]])
 			{
 				if (disp_err)
 					std::cout << "SM5: i = " << i << ", j = " << j << ": sigma(sigma(i) -> sigma(j) <> sigma(i) -> sigma(j).\n";
